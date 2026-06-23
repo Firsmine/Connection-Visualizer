@@ -1,11 +1,7 @@
 // node logic
-import { state } from "./state.js";
-import { render } from "./render.js";
-import { saveData } from "./storage.js";
-
 let draggedNodeId = null;
 
-export function initNodeEvents(svgElement) {
+function initNodeEvents(svgElement) {
   const popupNode = document.getElementById("popupNode");
   const inputNodeName = document.getElementById("inputNodeName");
   const btnCreateNode = document.getElementById("btnCreateNode");
@@ -23,7 +19,7 @@ export function initNodeEvents(svgElement) {
     pendingCoords = { x: cursorPt.x, y: cursorPt.y };
 
     popupNode.style.left = e.clientX + 10 + "px";
-    popupNode.style.top = e.clientX + 10 + "px";
+    popupNode.style.top = e.clientY + 10 + "px";
     popupNode.classList.remove("hidden");
     inputNodeName.value = "";
     inputNodeName.focus();
@@ -77,7 +73,7 @@ export function initNodeEvents(svgElement) {
   });
 }
 
-export function deleteSelectedNode() {
+function deleteSelectedNode() {
   if (!state.selectedNode) return;
   state.nodes = state.nodes.filter((n) => n.id !== state.selectedNode);
   state.edges = state.edges.filter(

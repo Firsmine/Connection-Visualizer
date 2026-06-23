@@ -1,7 +1,5 @@
 // DOM svg
-import { state } from "./state.js";
-
-export function render() {
+function render() {
   const layerNodes = document.getElementById("layerNodes");
   const layerEdges = document.getElementById("layerEdges");
   const workspace = document.getElementById("workspace");

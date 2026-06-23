@@ -1,13 +1,4 @@
 // entry point, main event listener
-import { state } from "./state.js";
-import { render } from "./render.js";
-import { loadData, saveData } from "./storage.js";
-import { initNodeEvents, deleteSelectedNode } from "./node.js";
-import { initEdgeEvents } from "./edge.js";
-import { initPathfindingEvents } from "./pathfinding.js";
-import { initPanZoomEvents } from "./panzoom.js";
-import { initExportEvent } from "./export.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   const svgElement = document.getElementById("canvas");
 
@@ -47,13 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // clear all
   document.getElementById("btnClear").addEventListener("click", () => {
-    state.nodes = [];
-    state.edges = [];
-    state.selectedNode = null;
-    state.path = [];
-    state.mode = "NORMAL";
-    saveData();
-    render();
+    if (confirm("Clear all nodes?")) {
+      state.nodes = [];
+      state.edges = [];
+      state.selectedNode = null;
+      state.path = [];
+      state.mode = "NORMAL";
+      saveData();
+      render();
+    }
   });
 
   render();

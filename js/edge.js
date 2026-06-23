@@ -1,9 +1,5 @@
 // connection logic
-import { state } from "./state.js";
-import { render } from "./render.js";
-import { saveData } from "./storage.js";
-
-export function initEdgeEvents() {
+function initEdgeEvents() {
   const btnConnect = document.getElementById("btnConnect");
   const popupEdge = document.getElementById("popupEdge");
   const inputDistance = document.getElementById("inputEdgeDistance");

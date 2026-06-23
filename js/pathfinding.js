@@ -1,8 +1,5 @@
 // dijkstra
-import { state } from "./state.js";
-import { render } from "./render.js";
-
-export function initPathfindingEvents() {
+function initPathfindingEvents() {
   const btnPath = document.getElementById("btnPath");
 
   btnPath.addEventListener("click", () => {

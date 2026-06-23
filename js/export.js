@@ -1,5 +1,5 @@
 // save image
-export function initExportEvent() {
+function initExportEvent() {
   document.getElementById("btnSave").addEventListener("click", () => {
     const svg = document.getElementById("canvas");
     const serializer = new XMLSerializer();

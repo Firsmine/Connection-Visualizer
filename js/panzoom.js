@@ -1,8 +1,5 @@
 // pan zoom logic
-import { state } from "./state.js";
-import { render } from "./render.js";
-
-export function initPanZoomEvents(svgElement) {
+function initPanZoomEvents(svgElement) {
   let isPanning = false;
 
   svgElement.addEventListener("mousedown", (e) => {
@@ -27,13 +24,27 @@ export function initPanZoomEvents(svgElement) {
   svgElement.addEventListener(
     "wheel",
     (e) => {
-      if (e.ctrlKey) {
-        e.preventDefault();
-        const zoomAmount = 0.1;
-        if (e.deltaY < 0) state.zoom += zoomAmount;
-        else state.zoom = Math.max(0.1, state.zoom - zoomAmount);
-        render();
+      const rect = svgElement.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // calculating cursor coords
+      const svgX = (mouseX - state.pan.x) / state.zoom;
+      const svgY = (mouseY - state.pan.y) / state.zoom;
+
+      // change zoom amount
+      const zoomAmount = 0.1;
+      if (e.deltaY < 0) {
+        state.zoom += zoomAmount;
+      } else {
+        state.zoom = Math.max(0.1, state.zoom - zoomAmount);
       }
+
+      // zoom on cursor
+      state.pan.x = mouseX - svgX * state.zoom;
+      state.pan.y = mouseY - svgY * state.zoom;
+
+      render();
     },
     { passive: false },
   );
