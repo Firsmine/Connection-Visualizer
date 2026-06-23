@@ -27,14 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // delete
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Backspace" && e.target.tagName !== "INPUT") {
-      deleteSelectedNode();
-    }
-  });
   document
     .getElementById("btnDelete")
     .addEventListener("click", deleteSelectedNode);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT") return;
+
+    if (e.key === "Backspace" || e.key === "Delete") {
+      deleteSelectedNode();
+    }
+  });
 
   // clear all
   document.getElementById("btnClear").addEventListener("click", () => {

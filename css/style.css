@@ -45,7 +45,7 @@ html {
   gap: 5px;
   color: #333;
 }
-.disabled {
+.btn:disabled {
   cursor: not-allowed;
   opacity: 60%;
 }
@@ -82,22 +82,23 @@ html {
   margin: 0 0 10px 0;
   font-size: 16px;
 }
-.input-group {
+.inputGroup {
   display: flex;
   gap: 5px;
 }
-.input-group input {
+.inputGroup input {
   padding: 5px;
   border: 1px solid #333;
   border-radius: 4px;
-  width: 80px;
+  width: 100px;
 }
-.input-group button {
-  background: #dcd0ff;
-  border: 1px solid #333;
+.inputGroup button {
+  background: #b6c2ff;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
   padding: 5px 10px;
+  font-weight: 600;
 }
 
 /* nodes & edges */

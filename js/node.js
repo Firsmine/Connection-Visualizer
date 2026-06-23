@@ -75,12 +75,19 @@ function initNodeEvents(svgElement) {
 
 function deleteSelectedNode() {
   if (!state.selectedNode) return;
-  state.nodes = state.nodes.filter((n) => n.id !== state.selectedNode);
-  state.edges = state.edges.filter(
-    (e) => e.from !== state.selectedNode && e.to !== state.selectedNode,
-  );
-  state.selectedNode = null;
-  state.path = [];
-  saveData();
-  render();
+  if (confirm("Delete node and all of its connections?")) {
+    state.nodes = state.nodes.filter(
+      (node) => String(node.id) !== String(state.selectedNode),
+    );
+    state.edges = state.edges.filter(
+      (edge) =>
+        String(edge.from) !== String(state.selectedNode) &&
+        String(edge.to) !== String(state.selectedNode),
+    );
+    state.selectedNode = null;
+    state.highlightedNodes = [];
+    state.highlightedEdges = [];
+    saveData();
+    render();
+  }
 }

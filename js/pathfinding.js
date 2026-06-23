@@ -21,22 +21,41 @@ function initPathfindingEvents() {
 }
 
 function findShortestPath(startId, endId) {
+  const start = String(startId);
+  const end = String(endId);
+
   const distances = {};
   const prev = {};
   const unvisited = new Set();
   const adj = {};
 
+  state.highlightedNodes = [];
+  state.highlightedEdges = [];
+
   // build adjacency list
   state.nodes.forEach((n) => {
+    const nodeIdStr = String(n.id);
     distances[n.id] = Infinity;
     adj[n.id] = [];
-    unvisited.add(n.id);
+    unvisited.add(nodeIdStr);
   });
   distances[startId] = 0;
 
   state.edges.forEach((e) => {
-    adj[e.from].push({ node: e.to, weight: e.distance, edgeId: e.id });
-    adj[e.to].push({ node: e.from, weight: e.distance, edgeId: e.id }); // undirected
+    const fromStr = String(e.from);
+    const toStr = String(e.to);
+    if (adj[fromStr] && adj[toStr]) {
+      adj[fromStr].push({
+        node: toStr,
+        weight: e.distance,
+        edgeId: String(e.id),
+      });
+      adj[toStr].push({
+        node: fromStr,
+        weight: e.distance,
+        edgeId: String(e.id),
+      });
+    }
   });
 
   while (unvisited.size > 0) {
@@ -64,19 +83,16 @@ function findShortestPath(startId, endId) {
     });
   }
 
-  // backtrack
-  const path = [];
   let curr = endId;
   if (prev[curr] || curr === startId) {
     while (curr) {
-      path.push(curr);
+      state.highlightedNodes.push(curr);
       if (prev[curr]) {
-        path.push(prev[curr].edgeId); // save edge id
+        state.highlightedEdges.push(prev[curr].edgeId); // save edge id
         curr = prev[curr].id;
       } else {
         curr = null;
       }
     }
   }
-  state.path = path;
 }
