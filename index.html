@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CONNECTION VISUALIZER</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="topbar">
+        <button id="btnSave" class="btn">
+          <img src="assets/download.svg" />Save Image
+        </button>
+        <button id="btnPath" class="btn disabled" disabled>
+          <img src="assets/find_path.svg" />Find Path
+        </button>
+        <button id="btnConnect" class="btn disabled" disabled>
+          <img src="assets/connect.svg" />Connect
+        </button>
+        <button id="btnDelete" class="btn disabled" disabled>
+          <img src="assets/delete.svg" />Delete
+        </button>
+        <button id="btnClear" class="btn">
+          <img src="assets/empty.svg" />Clear
+        </button>
+      </div>
+
+      <div id="statusLabel" class="status-hidden">Choose target node</div>
+
+      <div id="popupNode" class="popup hidden">
+        <h4>Create node</h4>
+        <div class="inputGroup">
+          <input type="text" id="inputNodeName" placeholder="Name" />
+          <button id="btnCreateNode">Create</button>
+        </div>
+      </div>
+
+      <div id="popupEdge" class="popup hidden">
+        <h4>Distance</h4>
+        <div class="inputGroup">
+          <input type="text" id="inputEdgeDistance" placeholder="Distance" />
+          <button id="btnCreateEdge">Connect</button>
+        </div>
+      </div>
+
+      <svg id="canvas" width="100%" height="100%">
+        <defs>
+          <pattern
+            id="grid"
+            width="10"
+            height="10"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 10 0 L 0 0 0 10"
+              fill="none"
+              stroke="#bbb"
+              stroke-width="1"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <g id="workspace">
+          <g id="layerEdges"></g>
+          <g id="layerNodes"></g>
+        </g>
+      </svg>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
