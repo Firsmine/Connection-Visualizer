@@ -10,19 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
   initExportEvent();
 
   svgElement.addEventListener("click", (e) => {
-    // blank space clicked
-    if (e.target.tagName === "svg" || e.target.tagName === "rect") {
-      state.selectedNode = null;
-      state.path = [];
-      state.mode = "NORMAL";
-      render();
-    } else {
-      const g = e.target.closest("g.node");
+    const g = e.target.closest("g.node");
+    if (g) {
       if (g && state.mode === "NORMAL") {
         state.selectedNode = g.getAttribute("data-id");
-        state.path = [];
+        state.highlightedNodes = [];
+        state.highlightedEdges = [];
         render();
       }
+    } else {
+      state.selectedNode = null;
+      state.mode = "NORMAL";
+      state.highlightedNodes = [];
+      state.highlightedEdges = [];
+      render();
     }
   });
 

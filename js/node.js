@@ -5,6 +5,7 @@ function initNodeEvents(svgElement) {
   const popupNode = document.getElementById("popupNode");
   const inputNodeName = document.getElementById("inputNodeName");
   const btnCreateNode = document.getElementById("btnCreateNode");
+  const canvas = document.getElementById("canvas");
   let pendingCoords = null;
 
   svgElement.addEventListener("dblclick", (e) => {
@@ -23,6 +24,10 @@ function initNodeEvents(svgElement) {
     popupNode.classList.remove("hidden");
     inputNodeName.value = "";
     inputNodeName.focus();
+
+    // canvas.addEventListener("click", () => {
+    //   popupNode.classList.add("hidden");
+    // });
   });
 
   const finalizeCreate = () => {
